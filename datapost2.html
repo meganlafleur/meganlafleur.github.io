@@ -1,0 +1,233 @@
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Data & Visualizations</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="single is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">Megan Lafleur</a></h1>
+						<nav class="links">
+							<ul>
+								<li><a href="about.html">About</a></li>
+								<li><a href="data.html">Data & Visualizations</a></li>
+								<li><a href="powerplatform.html">Power Platform</a></li>
+							</ul>
+						</nav>
+						<nav class="main">
+							<ul>
+								<li class="search">
+									<a href="#search">Search</a>
+									<form id="search" method="get" action="#">
+										<input type="text" name="query" placeholder="Search" />
+									</form>
+								</li>
+								<li class="menu">
+									<a class="fa-bars" href="#menu">Menu</a>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<section id="menu">
+
+						<!-- Search -->
+							<section>
+								<form class="search" method="get" action="#">
+									<input type="text" name="query" placeholder="Search" />
+								</form>
+							</section>
+
+						<!-- Links -->
+							<section>
+								<ul class="links">
+									<li>
+										<a href="#">
+											<h3>Lorem ipsum</h3>
+											<p>Feugiat tempus veroeros dolor</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h3>Dolor sit amet</h3>
+											<p>Sed vitae justo condimentum</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h3>Feugiat veroeros</h3>
+											<p>Phasellus sed ultricies mi congue</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h3>Etiam sed consequat</h3>
+											<p>Porta lectus amet ultricies</p>
+										</a>
+									</li>
+								</ul>
+							</section>
+
+
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="#">Identifying fuzzy duplicate clients</a></h2>
+										<p>Using python and postgresql to sort through a messy client list</p>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2024-06-05">June 5, 2024</time>
+										<a href="#" class="author"><span class="name">SQL</span><img src="images/database.png" alt="" /></a>
+									</div>
+								</header>
+								<span class="image featured"><img src="images/query1.png" alt="" /></span>
+								<p><pre><code>
+
+/*Python - Generated random client data with duplicates and saved as a csv*/
+
+import pandas as pd
+import numpy as np
+import random
+from faker import Faker
+
+# Initialize Faker to get random data
+fake = Faker()
+
+# Establish number of unique clients and total entries
+num_unique_clients = 400
+total_entries = 500
+
+# Make unique client dataset
+data = {
+    'client_id': [i for i in range(1, num_unique_clients + 1)],
+    'name': [fake.name() for _ in range(num_unique_clients)],
+    'dob': [fake.date_of_birth() for _ in range(num_unique_clients)],
+    'email': [fake.email() for _ in range(num_unique_clients)],
+    'phone': [fake.phone_number() for _ in range(num_unique_clients)],
+    'address': [fake.address() for _ in range(num_unique_clients)],
+}
+
+# Make a dataframe
+df_unique = pd.DataFrame(data)
+
+# Randomly select some clients to duplicate
+duplicate_indices = np.random.choice(df_unique.index, total_entries - num_unique_clients, replace=True)
+
+# Create final dataset w duplicates
+df_final = pd.concat([df_unique, df_unique.loc[duplicate_indices]], ignore_index=True).sample(frac=1).reset_index(drop=True)
+
+print(df_final.head())
+
+# Save data to csv
+df_final.to_csv('random_data.csv')
+
+--Switch to postgres
+
+--Make a client table
+	CREATE TABLE client (
+			client_id INT,
+			name VARCHAR(255),
+			email VARCHAR(255),
+			address (VARCHAR255),
+			dob DATE
+		)
+									
+	--Grabbed the csv and copied it into the client table
+		copy client(client_id,name,email,address,dob)
+		from 'megan/documents/python/client_data_with_dob_and_duplicates.csv'
+									
+	--Went back and changed the primary key column to populate serial values to take out the duplicated client id values because we accidentally duplicated those also but in our actual problem the client ids were unique
+		ALTER TABLE client
+		DROP COLUMN client_id;
+									
+		ALTER TABLE client
+		ADD COLUMN client_id SERIAL PRIMARY KEY;
+									
+		--Take out the apt, suite, and box numbers to avoid soundex being thrown off
+		SELECT address, 
+		CASE WHEN address LIKE '% Suite%' THEN split_part(address,' Suite',1)
+		WHEN address LIKE '% Apt%' THEN split_part(address,' Apt',1)
+		WHEN address LIKE '% Box%' THEN split_part(address,' Box',1)
+		ELSE address
+		END as street
+		FROM client;
+									
+		--Fuzzy match duplicate clients with potential name misspellings and different client ids
+		SELECT row_number () over (PARTITION BY c1.name ORDER BY c1.name), c1.name, c2.name,c1.client_id,c2.client_id, c1.dob,c2.dob
+		FROM (select distinct(name),client_id, dob from client) as c1
+		JOIN client c2
+		ON soundex(c1.name)=soundex(c2.name)
+		WHERE (c1.dob=c2.dob OR c1
+		AND c1.client_id <> c2.client_id;
+									
+		</code>
+	</pre></p>
+	<p>
+		An issue we faced at work was our database accepting duplicate client records, 
+		with the duplicates being scattered among several versions of a name or address. 
+		For example, we may have a Jane Doe and Jane Doe, both with a 3/2/65 date of birth 
+		and matching birth certificate ID, but one has the address 1234 Apple Ave and 
+		the other has the address 1234 Apple Ave Apt 103. Separately, we may have a Jane Doe and a Jaine doe
+		also with matching identifying information. 
+		
+		A team of people would work through an extract of all the potential duplicates,
+		but not all duplicate clients would be grouped together. As a result, 
+		someone would only merge the first set of Jane Doe records, later finding more 
+		duplicate records. In the meantime, submitters could attach additional 
+		client information to any of the potential Jane Doe client records, scattering client details. 
+
+		Ultimately, we knew we needed more constraints and software that could better match the 
+		ambiguous records on the front end. The barrier was acquiring the resources to put those
+		fixes in, which was above my paygrade. The best I could do while we waited was to rework 
+		our query to partition duplicate clients in a way that captured as many as we could. 
+	</p>
+			<p></p>
+								<footer>
+									<ul class="stats">
+										<li><a href="data.html">>Data & visualizations</a></li>
+									</ul>
+								</footer>
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<ul class="icons">
+							<li><a href="meganlafleur.tx@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+									<li><a href="https://www.linkedin.com/in/meganlafleur/" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+									<li><a href="https://github.com/meganlafleur" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+						<p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a href="http://unsplash.com">Unsplash</a>.</p>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

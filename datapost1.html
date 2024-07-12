@@ -1,0 +1,281 @@
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Data & Visualizations</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="single is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">Megan Lafleur</a></h1>
+						<nav class="links">
+							<ul>
+								<li><a href="about.html">About</a></li>
+								<li><a href="data.html">Data & Visualizations</a></li>
+								<li><a href="powerplatform.html">Power Platform</a></li>
+							</ul>
+						</nav>
+						<nav class="main">
+							<ul>
+								<li class="search">
+									<a href="#search">Search</a>
+									<form id="search" method="get" action="#">
+										<input type="text" name="query" placeholder="Search" />
+									</form>
+								</li>
+								<li class="menu">
+									<a class="fa-bars" href="#menu">Menu</a>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<section id="menu">
+
+						<!-- Search -->
+							<section>
+								<form class="search" method="get" action="#">
+									<input type="text" name="query" placeholder="Search" />
+								</form>
+							</section>
+
+						<!-- Links -->
+							<section>
+								<ul class="links">
+									<li>
+										<a href="#">
+											<h3>Lorem ipsum</h3>
+											<p>Feugiat tempus veroeros dolor</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h3>Dolor sit amet</h3>
+											<p>Sed vitae justo condimentum</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h3>Feugiat veroeros</h3>
+											<p>Phasellus sed ultricies mi congue</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h3>Etiam sed consequat</h3>
+											<p>Porta lectus amet ultricies</p>
+										</a>
+									</li>
+								</ul>
+							</section>
+
+						<!-- Actions -->
+							<section>
+								<ul class="actions stacked">
+									<li><a href="#" class="button large fit">Log In</a></li>
+								</ul>
+							</section>
+
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="#">Building out a landing page in Tableau</a></h2>
+										<p>Organizing Tableau dashboards using a centralized landing page</p>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2024-06-05">July 5, 2015</time>
+										<a href="#" class="author"><span class="name">Data</span><img src="images/database.png" alt="" /></a>
+									</div>
+								</header>
+								<span class="image featured"><img src="images/query1.png" alt="" /></span>
+								<p><pre><code>
+		--standardize date format
+
+		SELECT SaleDate, CONVERT(Date,SaleDate) AS SaleDateNew
+		FROM dbo.HousingData;
+									
+		ALTER TABLE dbo.HousingData
+		Add SaleDateConverted Date;
+									
+		Update dbo.HousingData
+		SET SaleDateConverted = CONVERT(Date,SaleDate);
+									
+		SELECT *
+		FROM dbo.HousingData;
+									
+		/*ALTER TABLE dbo.HousingData
+		--Drop column SaleDate;*/
+									
+		SELECT *
+		FROM NashvilleHousing.dbo.HousingData
+		WHERE PropertyAddress is null;
+									
+		--populate property address data for null values using self join
+									
+		SELECT *
+		FROM dbo.HousingData
+		WHERE PropertyAddress is null;
+		order by ParcelID;
+									
+		--if parcel ID has an address, populate the row with the same parcel ID with the same address
+									
+		SELECT a.ParcelID, a.PropertyAddress, b.ParcelID, b.PropertyAddress, ISNULL(a.PropertyAddress, b.PropertyAddress) AS aPropertyAddress2
+		FROM dbo.HousingData a 
+		JOIN dbo.HousingData b
+		ON a.ParcelID = b.ParcelID
+		AND a.UniqueID <> b. UniqueID
+		WHERE a.PropertyAddress is null;
+									
+		Update a
+		SET PropertyAddress = ISNULL(a.PropertyAddress, b.PropertyAddress)
+		FROM dbo.HousingData a 
+		JOIN dbo.HousingData b
+		ON a.ParcelID = b.ParcelID
+		AND a.UniqueID <> b. UniqueID
+		WHERE a.PropertyAddress is null;
+									
+		SELECT *
+		FROM NashvilleHousing.dbo.HousingData;							
+									
+		--Break out property address and owner address into individual columns (address, city, state)
+									
+		SELECT PropertyAddress
+		FROM NashvilleHousing.dbo.HousingData;
+									
+		SELECT
+		SUBSTRING(PropertyAddress, 1, CHARINDEX(',',PropertyAddress)-1) AS Address,
+		SUBSTRING(PropertyAddress, CHARINDEX(',', PropertyAddress) +1, LEN(propertyaddress)) AS City
+		FROM NashvilleHousing.dbo.HousingData;
+									
+		ALTER TABLE NashvilleHousing.dbo.HousingData
+		ADD PropertySplitAddress text;
+									
+		Update NashvilleHousing.dbo.HousingData
+		SET PropertySplitAddress = SUBSTRING(PropertyAddress, 1, CHARINDEX(',',PropertyAddress)-1) ;
+									
+		ALTER TABLE NashvilleHousing.dbo.HousingData
+		ADD PropertySplitCity text;
+									
+		Update NashvilleHousing.dbo.HousingData
+		SET PropertySplitCity = SUBSTRING(PropertyAddress, CHARINDEX(',', PropertyAddress) +1, LEN(propertyaddress));
+									
+		SELECT PARSENAME(REPLACE(OwnerAddress, ',','.'), 3), PARSENAME(REPLACE(OwnerAddress, ',','.'), 2), PARSENAME(REPLACE(OwnerAddress, ',','.'), 1)
+		FROM NashvilleHousing.dbo.HousingData;
+									
+		ALTER TABLE NashvilleHousing.dbo.HousingData
+		ADD  SplitOwnerAddress text;
+									
+		Update NashvilleHousing.dbo.HousingData
+		SET SplitOwnerAddress = PARSENAME(REPLACE(OwnerAddress, ',','.'), 3);
+									
+		ALTER TABLE NashvilleHousing.dbo.HousingData
+		ADD  SplitOwnerCity text;
+		
+		Update NashvilleHousing.dbo.HousingData
+		SET SplitOwnerCity = PARSENAME(REPLACE(OwnerAddress, ',','.'), 2);
+									
+		ALTER TABLE NashvilleHousing.dbo.HousingData
+		ADD  SplitOwnerState text;
+									
+		Update NashvilleHousing.dbo.HousingData
+		SET SplitOwnerState = PARSENAME(REPLACE(OwnerAddress, ',','.'), 1)
+									
+		SELECT *
+		FROM dbo.HousingData;
+									
+		--standardize y and n in sold as vacant field (converting 'y' and 'n' to 'yes' and 'no')
+									
+		SELECT DISTINCT(SoldAsVacant), count(soldasvacant)
+		FROM dbo.HousingData
+		GROUP BY SoldAsVacant
+		ORDER BY 2;
+									
+		SELECT SoldAsVacant, CASE When SoldAsVacant = 'Y' THEN 'Yes'
+		When SoldAsVacant = 'N' THEN 'No'Else SoldAsVacant
+		END
+		FROM NashvilleHousing.dbo.HousingData;
+									
+		UPDATE NashvilleHousing.dbo.HousingData
+		SET SoldAsVacant = CASE When SoldAsVacant = 'Y' THEN 'Yes'
+		When SoldAsVacant = 'N' THEN 'No'
+		Else SoldAsVacant
+		END
+									
+		--Remove duplicates
+									
+		WITH RowNumCTE AS(
+									
+		SELECT *,
+		ROW_NUMBER() OVER (
+		PARTITION BY ParcelID,
+			PropertyAddress,
+			LegalReference,
+			SaleDateConverted,
+			SalePrice
+			ORDER BY UniqueID) row_num
+		FROM NashvilleHousing.dbo.HousingDatA)
+			SELECT *
+			FROM RowNumCTE
+									
+		--delete duplicate rows that had more than one row in each partition
+		/*DELETE 
+		FROM RowNumCTE
+		WHERE row_num > 1*/
+									
+		--delete unused columns
+									
+		ALTER TABLE dbo.HousingData
+		DROP COLUMN OwnerAddress, TaxDistrict, PropertyAddress
+									
+		SELECT *
+		FROM dbo.HousingData
+		</code></pre></p>
+			<p></p>
+								<footer>
+									<ul class="stats">
+										<li><a href="data.html">> Data</a></li>
+									</ul>
+								</footer>
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<ul class="icons">
+							<li><a href="lafleurmegan17@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+							<li><a href="https://www.linkedin.com/in/meganlafleur/" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="https://github.com/meganlafleur" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+						<p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a href="http://unsplash.com">Unsplash</a>.</p>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
