@@ -1,0 +1,247 @@
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Power Platform</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="single is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">Megan Lafleur</a></h1>
+						<nav class="links">
+							<ul>
+								<li><a href="about.html">About</a></li>
+								<li><a href="data.html">Data & Visualizations</a></li>
+								<li><a href="powerplatform.html">Power Platform</a></li>
+							</ul>
+						</nav>
+						<nav class="main">
+							<ul>
+								<li class="search">
+									<a href="#search">Search</a>
+									<form id="search" method="get" action="#">
+										<input type="text" name="query" placeholder="Search" />
+									</form>
+								</li>
+								<li class="menu">
+									<a class="fa-bars" href="#menu">Menu</a>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<section id="menu">
+
+		
+
+						<!-- Links -->
+							<section>
+								<ul class="links">
+									<li>
+										<a href="datapost1.html">
+											<h3>Building out a landing page in Tableau</h3>
+											<p>Organizing Tableau dashboards using a centralized landing page</p>
+										</a>
+									</li>
+									<li>
+										<a href="datapost2.html">
+											<h3>Identifying fuzzy duplicate clients</h3>
+											<p>Using python and postgresql to sort through a messy client list</p>
+										</a>
+									</li>
+									<li>
+										<a href="powerplatformpost1.html">
+											<h3>Canvas power app solution</h3>
+											<p>Integrated request form and approval process</p>
+										</a>
+									</li>
+								</ul>
+							</section>
+
+
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="#">Program enrollment process</a></h2>
+										<p>Replacing a shared Excel file with an app, list, and flow</p>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2024-04-01">April 1, 2024</time>
+										<a href="#" class="author"><span class="name">Power Platform</span><img src="images/pplogo.png" alt="" /></a>
+									</div>
+								</header>
+								<span class="image featured"><img src="images/pp2.png" alt="" /></span>
+								<p><pre>
+	</pre></p>
+	<p>
+		Our team faced issues with processing approvals to grant access to local systems with sensitive data. 
+		The existing process was for managers to email whoever they knew by word-of-mouth could grant system access. 
+		The person would respond if the new system user was approved for system access and ask any follow-up questions about the specific 
+		systems or system environments the user needed. Someone would then be emailed or messaged separately to grant the requested access, 
+		then finally messaging the new user to notify them of their newly granted access. A team member would then manually save the related emails 
+		into a SharePoint folder as documentation for audits. The team requested a front-end form interface with approval triggers. 
+		The timeline was tight, so I opted for a Canvas Power App with a SharePoint List and Power Automate flows to consolidate the workflow.
+		We already had access to the Power Platform through our enterprise Microsoft License, which made setup easy. The big downside was we did not have
+		access to premium connectors (Oracle database) or dataverse.</p>
+		<p>Here's a walkthrough of what the app looked like initially:</p>
+		<div class="col-12"><span class="image fit"><img src="images/pp1.mov" alt="" /></span></div>
+		<video controls="controls" width="800" height="600" name="Video Name">
+			<source src="images/pp1.mov">
+		  </video>
+
+		
+	<p>
+		I ended up making a few cosmetic and branding changes later:
+
+		<div class="col-12"><span class="image fit"><img src="images/usermgmtapp1.png" alt="" /></span></div>
+
+	</p>
+	<p>
+		I also added a different progress bar and required data to be entered before the "next" button was available in the form.
+
+		<div class="col-12"><span class="image fit"><img src="images/usermgmtapp3.png" alt="" /></span></div>
+
+	</p>
+
+	<p>
+		Then we needed a way to know what type of employee was being granted access, so I added a toggle for full time employees and contractors.
+
+		<div class="col-12"><span class="image fit"><img src="images/usermgmtapp4.png" alt="" /></span></div>
+
+	</p>
+
+	<p>
+		On the backend, there's a list that has each team and the type of access the team usually requires. For example, the team that fields calls from providers to assist with 
+		changes to their accounts in our systems require a level of access that gives them the ability to make edits. In contrast, someone who only pulls reports from our systems 
+		has a lower level of read-only/report-only access. When a new request is submitted, those expected access levels will attach to the request. The security team member who completed the request
+		will know what type of access to set. 
+
+		<div class="col-12"><span class="image fit"><img src="images/usermgmtapp5.png" alt="" /></span></div>
+
+	</p>
+
+	<p>
+		Managers also have the option to grant a lower staging area access for new hires, then grant production access later.
+
+		<div class="col-12"><span class="image fit"><img src="images/usermgmtapp6.png" alt="" /></span></div>
+
+	</p>
+
+	<p>
+		We facilitate access to several systems, and users can select as many as they need. Some selections
+		will trigger additional approvals. For example, if a user requires database access, there's several additional approvals that will trigger
+		so we can coordinate with out database admins for anew user setup.
+
+		<div class="col-12"><span class="image fit"><img src="images/usermgmtapp7.png" alt="" /></span></div>
+
+	</p>
+
+	<p>
+		One requested functionality was requiring justification. In the event of an audit, we would have justifications on file for each system user.
+
+		<div class="col-12"><span class="image fit"><img src="images/usermgmtapp9.png" alt="" /></span></div>
+
+	</p>
+
+	<p>
+		At the end of the form, the manager's signature will populate with their role and a timestamp. They have the option to either use the populated signature
+		or to draw their signature. The timestamp signature saved to the backend as a string value and the drawn signature stored as an image.
+		When the user hits submit, all form fields are patched to the SharePoint List in a new data row and placed in pending approval status.
+		
+
+		<div class="col-12"><span class="image fit"><img src="images/usermgmtapp10.png" alt="" /></span></div>
+		<div class="col-12"><span class="image fit"><img src="images/usermgmtapp11.png" alt="" /></span></div>
+	</p>
+
+	<p>
+		When a new row is added to the list, a Power Automate flow is triggered to request approval from our security team via email. 
+		<div class="col-12"><span class="image fit"><img src="images/flow1.png" alt="" /></span></div>
+		<div class="col-12"><span class="image fit"><img src="images/flow3.png" alt="" /></span></div>
+	</p>
+
+	<p>
+		The approval emails has a deep link with the ID of the new request row. The security team can click it and will be taken to the approval page.
+		<div class="col-12"><span class="image fit"><img src="images/flow4.png" alt="" /></span></div>
+		<div class="col-12"><span class="image fit"><img src="images/approvalpage.png" alt="" /></span></div>
+		
+	</p>
+
+	<p>
+		Once a request is approved, an email is triggered back to the original requester.
+		<div class="col-12"><span class="image fit"><img src="images/flow7.png" alt="" /></span></div>
+		
+	</p>
+
+	<p>
+		The approval email is automatically stored in a designated SharePoint folder in case of auditor request.
+		<div class="col-12"><span class="image fit"><img src="images/flow5.png" alt="" /></span></div>
+		
+	</p>
+
+	<p>
+		But what if someone leaves or no longer needs access? In that case, we can revoke access. Back in the app, there's a page where our security team
+		can view all existing users and make edits.
+		<div class="col-12"><span class="image fit"><img src="images/revoke1.png" alt="" /></span></div>
+		<div class="col-12"><span class="image fit"><img src="images/revoke2.png" alt="" /></span></div>
+		<div class="col-12"><span class="image fit"><img src="images/revoke3.png" alt="" /></span></div>
+	</p>
+
+	<p>
+		An email will then come back to our team so someone can disassociate access.
+		<div class="col-12"><span class="image fit"><img src="images/flow2.png" alt="" /></span></div>
+	</p>
+
+	<p>
+		Last but not least, a flow runs every week to clear revoked users off our list and move them to an archive list.
+		<div class="col-12"><span class="image fit"><img src="images/flow9.png" alt="" /></span></div>
+	</p>
+
+
+								<footer>
+									<ul class="stats">
+										<li><a href="powerplatform.html">Power Platform</a></li>
+									</ul>
+								</footer>
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<ul class="icons">
+							<li><a href="meganlafleur.tx@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+									<li><a href="https://www.linkedin.com/in/meganlafleur/" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+									<li><a href="https://github.com/meganlafleur" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+						<p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a href="http://unsplash.com">Unsplash</a>.</p>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
