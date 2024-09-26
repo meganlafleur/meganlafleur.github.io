@@ -84,135 +84,98 @@
 										<p>Replacing a shared Excel file with an app, list, and flow</p>
 									</div>
 									<div class="meta">
-										<time class="published" datetime="2024-04-01">April 1, 2024</time>
+										<time class="published" datetime="2024-04-01">September 15, 2024</time>
 										<a href="#" class="author"><span class="name">Power Platform</span><img src="images/pplogo.png" alt="" /></a>
 									</div>
 								</header>
-								<span class="image featured"><img src="images/pp2.png" alt="" /></span>
+								<span class="image featured"><img src="images/re1.png" alt="" /></span>
 								<p><pre>
 	</pre></p>
 	<p>
-		Our team faced issues with processing approvals to grant access to local systems with sensitive data. 
-		The existing process was for managers to email whoever they knew by word-of-mouth could grant system access. 
-		The person would respond if the new system user was approved for system access and ask any follow-up questions about the specific 
-		systems or system environments the user needed. Someone would then be emailed or messaged separately to grant the requested access, 
-		then finally messaging the new user to notify them of their newly granted access. A team member would then manually save the related emails 
-		into a SharePoint folder as documentation for audits. The team requested a front-end form interface with approval triggers. 
-		The timeline was tight, so I opted for a Canvas Power App with a SharePoint List and Power Automate flows to consolidate the workflow.
-		We already had access to the Power Platform through our enterprise Microsoft License, which made setup easy. The big downside was we did not have
-		access to premium connectors (Oracle database) or dataverse.</p>
-		<p>Here's a walkthrough of what the app looked like initially:</p>
-		<div class="col-12"><span class="image fit"><img src="images/pp1.mov" alt="" /></span></div>
-		<video controls="controls" width="800" height="600" name="Video Name">
-			<source src="images/pp1.mov">
-		  </video>
+		This team completed a yearly enrollment process where all client information was updated and approved. The existing process was to pull an Excel file of clients and email it to 12+ team members to work through. The Excel sheet would be manually consolidated and then sent out each day to continue processing. 
 
 		
 	<p>
-		I ended up making a few cosmetic and branding changes later:
+		To replace the manual Excel file, we opted for a flow that looped through the Excel file each morning. New rows created a new SharePoint list item and existing rows updated the item.
 
-		<div class="col-12"><span class="image fit"><img src="images/usermgmtapp1.png" alt="" /></span></div>
+		<div class="col-12"><span class="image fit"><img src="images/pp2_flow1.png" alt="" /></span></div>
 
 	</p>
 	<p>
-		I also added a different progress bar and required data to be entered before the "next" button was available in the form.
+		If the client ID matches, or is not equal to 0, then it prompts an update. If the match is equal to 0, then it creates a new item.
 
-		<div class="col-12"><span class="image fit"><img src="images/usermgmtapp3.png" alt="" /></span></div>
-
-	</p>
-
-	<p>
-		Then we needed a way to know what type of employee was being granted access, so I added a toggle for full time employees and contractors.
-
-		<div class="col-12"><span class="image fit"><img src="images/usermgmtapp4.png" alt="" /></span></div>
+		<div class="col-12"><span class="image fit"><img src="images/pp2_flow2.png" alt="" /></span></div>
 
 	</p>
 
 	<p>
-		On the backend, there's a list that has each team and the type of access the team usually requires. For example, the team that fields calls from providers to assist with 
-		changes to their accounts in our systems require a level of access that gives them the ability to make edits. In contrast, someone who only pulls reports from our systems 
-		has a lower level of read-only/report-only access. When a new request is submitted, those expected access levels will attach to the request. The security team member who completed the request
-		will know what type of access to set. 
-
-		<div class="col-12"><span class="image fit"><img src="images/usermgmtapp5.png" alt="" /></span></div>
+		Once the list is updated, team members assign items as needed to process them. We decided to leave this as a manual process because it was dependent largely on who was working that day and had bandwidth, etc.
 
 	</p>
 
 	<p>
-		Managers also have the option to grant a lower staging area access for new hires, then grant production access later.
+		When users open the power app to process enrollments, the OnStart property stores their User().Email value as a variable.
+		All sites assigned to the user are shown in a gallery on their homepage. If the SharePoint list reviewer column has their email, then it appears as a pending item.
 
-		<div class="col-12"><span class="image fit"><img src="images/usermgmtapp6.png" alt="" /></span></div>
-
-	</p>
-
-	<p>
-		We facilitate access to several systems, and users can select as many as they need. Some selections
-		will trigger additional approvals. For example, if a user requires database access, there's several additional approvals that will trigger
-		so we can coordinate with out database admins for anew user setup.
-
-		<div class="col-12"><span class="image fit"><img src="images/usermgmtapp7.png" alt="" /></span></div>
+		<div class="col-12"><span class="image fit"><img src="images/re2.png" alt="" /></span></div>
+		<div class="col-12"><span class="image fit"><img src="images/re3.png" alt="" /></span></div>
 
 	</p>
 
 	<p>
-		One requested functionality was requiring justification. In the event of an audit, we would have justifications on file for each system user.
+		Users select organizations from the gallery to make edits and approve. From the edit page, users can make notes, change the status, and email the org's points-of-contact for more information.
 
-		<div class="col-12"><span class="image fit"><img src="images/usermgmtapp9.png" alt="" /></span></div>
+		<div class="col-12"><span class="image fit"><img src="images/re4.png" alt="" /></span></div>
 
 	</p>
 
 	<p>
-		At the end of the form, the manager's signature will populate with their role and a timestamp. They have the option to either use the populated signature
-		or to draw their signature. The timestamp signature saved to the backend as a string value and the drawn signature stored as an image.
-		When the user hits submit, all form fields are patched to the SharePoint List in a new data row and placed in pending approval status.
+		After edits are made, the user hits submit. On select of submit, the item is placed into two collections, one of completed orgs for the day and one of total completed orgs. 
+
+		<div class="col-12"><span class="image fit"><img src="images/re5.png" alt="" /></span></div>
+
+	</p>
+
+	<p>
+		Why two collections? After submitting and returning to the home page, we can see the org submitted was moved to the reviewed section on the right. In the middle, it shows that we now only have 2 orgs to review. On the left, the completed org is also reflected in the "Re-enrollments reviewed today" count, as well as the "Total re-enrollments reviewed" count. The count from today shows us the number of orgs completed only today (one). The total orgs shows us the number of orgs the user has completed total during re-enrollment (2, in this case). We wanted a way to track both daily and total progress, so two collections worked best. The other requirement was that we needed a way to clear out today's completed enrollments collection.
+		Some organizations make changes to their submission and will update on the list the next day. If the user had already moved them to completed status, then they would appear completed the next day too, even though they re-submitted their enrollment and need to be reviewed again.
+
+		<div class="col-12"><span class="image fit"><img src="images/re6.png" alt="" /></span></div>
+
+	</p>
+
+	<p>
+		After resetting, the enrollments reviewed today resets. The total, however, remains the same -- so the user still gets credit for reviewing.
 		
 
-		<div class="col-12"><span class="image fit"><img src="images/usermgmtapp10.png" alt="" /></span></div>
-		<div class="col-12"><span class="image fit"><img src="images/usermgmtapp11.png" alt="" /></span></div>
+		<div class="col-12"><span class="image fit"><img src="images/re7.png" alt="" /></span></div>
 	</p>
 
 	<p>
-		When a new row is added to the list, a Power Automate flow is triggered to request approval from our security team via email. 
-		<div class="col-12"><span class="image fit"><img src="images/flow1.png" alt="" /></span></div>
-		<div class="col-12"><span class="image fit"><img src="images/flow3.png" alt="" /></span></div>
+		We also wanted the user to get credit for approved orgs, so the "My approvals" count on the left looks through the SharePoint list and counts the approved orgs assigned to the current user. 
+		We see here that it counts the two approvals seen in the gallery.
+		<div class="col-12"><span class="image fit"><img src="images/re8.png" alt="" /></span></div>
 	</p>
 
 	<p>
-		The approval emails has a deep link with the ID of the new request row. The security team can click it and will be taken to the approval page.
-		<div class="col-12"><span class="image fit"><img src="images/flow4.png" alt="" /></span></div>
-		<div class="col-12"><span class="image fit"><img src="images/approvalpage.png" alt="" /></span></div>
+		Last, but not least, the team needed a way to visually track progress 
+		for leadership. Tableau was not an ideal option because the SharePoint connector wasn't 
+		allowable in the organization. 
+		So, Power BI -- but most of the leadership team did not have Power
+		BI licenses.
 		
-	</p>
-
-	<p>
-		Once a request is approved, an email is triggered back to the original requester.
-		<div class="col-12"><span class="image fit"><img src="images/flow7.png" alt="" /></span></div>
+		Plan C -- build out the report in Power BI and spit it out as a PDF 
+		(usually the preferred format anyway).
 		
-	</p>
-
-	<p>
-		The approval email is automatically stored in a designated SharePoint folder in case of auditor request.
-		<div class="col-12"><span class="image fit"><img src="images/flow5.png" alt="" /></span></div>
+		After connecting the SharePoint list to a report and building out visuals, the report
+		was published in Power BI service. We set up a subscription to email a PDF of the report each week. 
+		We then built a Power Automate flow to trigger whenever the email report was received, grab the PDF, and email it
+		all the necessary people with the attachment. It also included a link to the report for
+		those that did have the right licenses.
+		<div class="col-12"><span class="image fit"><img src="images/pbidashboard3.png" alt="" /></span></div>
 		
 	</p>
 
-	<p>
-		But what if someone leaves or no longer needs access? In that case, we can revoke access. Back in the app, there's a page where our security team
-		can view all existing users and make edits.
-		<div class="col-12"><span class="image fit"><img src="images/revoke1.png" alt="" /></span></div>
-		<div class="col-12"><span class="image fit"><img src="images/revoke2.png" alt="" /></span></div>
-		<div class="col-12"><span class="image fit"><img src="images/revoke3.png" alt="" /></span></div>
-	</p>
-
-	<p>
-		An email will then come back to our team so someone can disassociate access.
-		<div class="col-12"><span class="image fit"><img src="images/flow2.png" alt="" /></span></div>
-	</p>
-
-	<p>
-		Last but not least, a flow runs every week to clear revoked users off our list and move them to an archive list.
-		<div class="col-12"><span class="image fit"><img src="images/flow9.png" alt="" /></span></div>
-	</p>
 
 
 								<footer>
