@@ -110,11 +110,13 @@
 
 	<p>
 		Once the list is updated, team members assign items as needed to process them. We decided to leave this as a manual process because it was dependent largely on who was working that day and had bandwidth, etc.
-
+		Though the assignment happens in the SharePoint list, it may also be a future switch to have it occur in the app instead. The team is accustomed to the list now, so the process continues to function with the list only being accessible
+		to the team leads for the assignment.
+		<div class="col-12"><span class="image fit"><img src="images/list1.png" alt="" /></span></div>
 	</p>
 
 	<p>
-		When users open the power app to process enrollments, the OnStart property stores their User().Email value as a variable.
+		The rest of the process continues in Power Apps. When users open the power app to process enrollments, the OnStart property stores their User().Email value as a variable.
 		All sites assigned to the user are shown in a gallery on their homepage. If the SharePoint list reviewer column has their email, then it appears as a pending item.
 
 		<div class="col-12"><span class="image fit"><img src="images/re2.png" alt="" /></span></div>
@@ -172,7 +174,7 @@
 		We then built a Power Automate flow to trigger whenever the email report was received, grab the PDF, and email it
 		all the necessary people with the attachment. It also included a link to the report for
 		those that did have the right licenses.
-		<div class="col-12"><span class="image fit"><img src="images/pbidashboard3.png" alt="" /></span></div>
+		<div class="col-12"><span class="image fit"><img src="images/pbidashboard4.png" alt="" /></span></div>
 		
 	</p>
 
