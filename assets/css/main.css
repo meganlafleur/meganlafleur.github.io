@@ -2302,6 +2302,10 @@ input, select, textarea {
 			.image.left img, .image.right img {
 				width: 100%;
 			}
+		
+		.image.left img {
+				border: 5px solid #555;
+			  }
 
 		.image.left {
 			float: left;
@@ -2322,7 +2326,7 @@ input, select, textarea {
 		}
 
 			.image.fit img {
-				width: 100%;
+				width: 70%;
 			}
 
 		.image.featured {
@@ -2332,7 +2336,7 @@ input, select, textarea {
 		}
 
 			.image.featured img {
-				width: 100%;
+				width: 90%;
 			}
 
 			@media screen and (max-width: 736px) {
@@ -3441,6 +3445,8 @@ input, select, textarea {
 			margin-left: -0.25em;
 			width: 4.5em;
 		}
+
+	
 
 	#intro header h2 {
 		font-size: 2em;

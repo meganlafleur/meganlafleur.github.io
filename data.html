@@ -49,15 +49,15 @@
 							<section>
 								<ul class="links">
 									<li>
-										<a href="datapost1.html">
-											<h3>Building out a landing page in Tableau</h3>
-											<p>Organizing Tableau dashboards using a centralized landing page</p>
+										<a href="powerplatformpost2.html">
+											<h3>Program enrollment process</h3>
+											<p>Replacing a shared Excel file with an app, list, and flow</p>
 										</a>
 									</li>
 									<li>
 										<a href="datapost2.html">
 											<h3>Identifying fuzzy duplicate clients</h3>
-											<p>Using python and postgresql to sort through a messy client list</p>
+											<p>Using postgresql to sort through a messy client list</p>
 										</a>
 									</li>
 									<li>
@@ -75,6 +75,97 @@
 					<div id="main">
 
 						<!-- Post -->
+						<article class="post">
+							<header>
+								<div class="title">
+									<h2><a href="">Tracking program KPIs</a></h2>
+									<p>Tracking program KPIs in Power BI with visible filters </p>
+								</div>
+								<div class="meta">
+									<time class="published" datetime="2024-10-30">October 30, 2024</time>
+									<a href="#" class="author"><span class="name">Power BI</span><img src="images/powerbi.png" alt="" /></a>
+								</div>
+							</header>
+	
+							<span class="image featured"><img src="images/renewal_dashboard.gif" alt="" /></span>
+							<p>This project was focused on tracking KPIs for multiple teams who complete a program renewal process each year for their clients. They wanted to track what statuses client renewals were in, including how many had been completed. They also wanted to filter based on client regions. I used DAX studio to add a visual showing which filters were applied. 
+								
+							</p>
+							<p>Most of the data here was extracted daily from 
+								an excel file and stored in a SharePoint list that 
+								was being modified as team members processed client 
+								renewals. I also added to the model an Oracle table 
+								holding specific region information and joined it to 
+								existing data using a unique client identifier. In this case, 
+								we also wanted to be able to filter by all regions (of Texas) 
+								and local health departments. To do this, I created a hierarchy 
+								of regions and local health departments within each to allow 
+								users to select specific areas.
+								
+								
+			
+							
+							</p>
+							<p>
+							
+								Unfortanately, the quality of the dashboard recording refused to cooperate at the time
+								of this posting, so I'm crossing my fingers that all the figures aren't completely
+								unreadable.
+							</p>
+							<footer>
+								<ul class="stats">
+									<li><a href="#">Data & visualizations</a></li>
+								</ul>
+							</footer>
+						</article>
+
+				</div>
+
+				<!-- Post -->
+				<article class="post">
+					<header>
+						<div class="title">
+							<h2><a href="">Data quality in Tableau</a></h2>
+							<p>Finding client duplicates</p>
+						</div>
+						<div class="meta">
+							<time class="published" datetime="2024-10-21">October 21, 2024</time>
+							<a href="#" class="author"><span class="name">Tableau</span><img src="images/tableau.png" alt="" /></a>
+						</div>
+					</header>
+
+					<span class="image featured"><img src="images/Example_merges.png" alt="" /></span>
+					
+					<p>This report was requested for staff to track the increase of a 
+						specific data point (clients) that were being duplicated in their 
+						database due to errors in the data ingested. They wanted to see how 
+						fast the duplicates were growing, how quickly they were being removed 
+						(merged), and which teams were removing them (this has been blocked out 
+						for privacy). 
+						This team did not want any filters in the report as they wanted a static file.
+						<br>
+						
+					</p>
+
+					<p>
+						The tables needed for this report were quite large, 
+						with some over 2 million rows. I opted for transforming and 
+						joining the data in Tableau and caching an extract which 
+						refreshed weekly. Six database tables were joined to get all the counts needed. 
+						Also appended to the removed/merged client count was an excel file with 
+						recently manually 
+						reviewed duplicate client accounts that were not reflected in the database.
+					</p>
+					<footer>
+						<ul class="stats">
+							<li><a href="#">Data & visualizations</a></li>
+						</ul>
+					</footer>
+				</article>
+
+		</div>
+
+						<!-- Post -->
 							<article class="post">
 								<header>
 									<div class="title">
@@ -87,26 +178,20 @@
 									</div>
 								</header>
 								<span class="image featured"><img src="images/consent_dashboard.jpg" alt="" /></span>
-								<p>My current project is organizing the many Tableau
-									dashboards in my folders. Though not the most thrilling topic on face value, this project
-									is important to my own personal workflow and mental health. I was clicking around looking 
-									for dashboards most days, usually inspired by someone mentioning in passing, "Oh yeah, I think we already
-									made one for that metric two years ago," and I thought there may be a way to organize them by topic and navigate around using just
+								<p>A recent side user experience project 
+									has been organizing the many Tableau
+									dashboards hoarded on a team's local drive with a Tableau-esque
+									table of contents with links to frequently used reports.
+									The goal is to organize them by topic and navigate around using just
 									one dashboard that I keep on hand.
 								</p>
-								<p>Initially, I hoped to hyperlink to all dashboards, but I then realized 
-									that would only be possible if all our dashboards were on the Tableau server. 
-									Surprise - they're not. Many of them have been stored in a shared drive, and I assume our 
-									Tableau server folks would not love the idea of bulk uploading all our dashboards
-									just for fun when they ultimately don't need to be accessed by anyone but our little corner
-									of the office. For now, I'm focusing on navigating to just a few topics that are coming up more frequently
-									and can reasonably be kept in a Tableau file without crashing. I'll also likely include a hover option with
-									the path to where the user can find dashboards about a content area. Not perfect, but better than tracking down
-									someone who may know someone who can find where they saved that dashboard they made in the summer of 2020.
+								<p>To have a linked path between content areas and reports, everything
+									will first need to be published into Tableau Server. Permissions will be set for
+									only the teams who require access.
 								
 									<br>
 									<br>
-									<a href="datapost1.html" class="button large">See more</a>
+							
 								
 								</p>
 								<footer>
@@ -124,7 +209,7 @@
 							<header>
 								<div class="title">
 									<h2><a href="datapost2.html">Identifying fuzzy duplicate clients</a></h2>
-									<p>Using python and postgresql to sort through a messy client list</p>
+									<p>Using postgresql to sort through a messy client list</p>
 								</div>
 								<div class="meta">
 									<time class="published" datetime="2024-06-05">June 5, 2024</time>
