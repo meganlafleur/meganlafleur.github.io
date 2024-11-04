@@ -1,0 +1,182 @@
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Data & Visualizations</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="single is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">Megan Lafleur</a></h1>
+						<nav class="links">
+							<ul>
+								<li><a href="about.html">About</a></li>
+								<li><a href="data.html">Data & Visualizations</a></li>
+								<li><a href="powerplatform.html">Power Platform</a></li>
+							</ul>
+						</nav>
+						<nav class="main">
+							<ul>
+								<li class="search">
+									<a href="#search">Search</a>
+									<form id="search" method="get" action="#">
+										<input type="text" name="query" placeholder="Search" />
+									</form>
+								</li>
+								<li class="menu">
+									<a class="fa-bars" href="#menu">Menu</a>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<section id="menu">
+
+			
+
+						<!-- Links -->
+							<section>
+								<ul class="links">
+									<li>
+										<a href="powerplatformpost2.html">
+											<h3>Program enrollment process</h3>
+											<p>Replacing a shared Excel file with an app, list, and flow</p>
+										</a>
+									</li>
+									<li>
+										<a href="datapost2.html">
+											<h3>Identifying fuzzy duplicate clients</h3>
+											<p>Using postgresql to sort through a messy client list</p>
+										</a>
+									</li>
+									<li>
+										<a href="powerplatformpost1.html">
+											<h3>Canvas power app solution</h3>
+											<p>Integrated request form and approval process</p>
+										</a>
+									</li>
+								</ul>
+							</section>
+
+
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="#">Budget allocation report</a></h2>
+										<p>Consolidating spending and budget information</p>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2024-11-01">November 1, 2024</time>
+										<a href="#" class="author"><span class="name">Power BI</span><img src="images/powerbi.png" alt="" /></a>
+									</div>
+								</header>
+								<span class="image featured"><img src="images/example_budget_video.gif" alt="" /></span>
+								<p>
+								An operations team needed a more consistent way to track
+								licensing costs for technical resources (Microsoft enterprise licenses, Adobe, etc.).
+								They had several csv files listing users, the resources, and the costs. Their requirements were
+								to consolidate the spending reports, balance them against the allocated budgets
+								for each of the teams, and see when overspending was occurring. 
+	</p>						
+								<p>
+									<h2>Merging the reports</h2>
+									The team had a collection of csv files all formatted the same, which made things a little easier.
+									I pulled the folder into Power Query and appended the reports into a singular table.
+									<br> 
+									<br>
+									<div class="col-12"><span class="image fit"><img src="images/budget1.png" alt="" /></span></div>
+								
+								</p>
+
+								<p>
+									<h2>Modeling</h2>
+									Since the data was fairly good sized, and it could potentially grow more over time, 
+									I went ahead and set up a model. I pulled the the cost information
+									into the fact table, then made dimension tables for the teams, products, and managers.
+									The budget table I made manually since it was just a matter of entering
+									in the single budget for each team. The date table I made using calendarauto().
+									<br> 
+									<br>
+									<div class="col-12"><span class="image fit"><img src="images/budget5.png" alt="" /></span></div>
+								
+								</p>
+
+								<p>
+									<h2>Relationships</h2>
+									I designated a unique identifier for each dimension with indexing: teamID, managerID, productID.
+									I connected each of them to the fact table using their ID values. I also connected
+									the order date to the date table and the budget table to each corresponding team value.
+									<br> 
+									<br>
+									<div class="col-12"><span class="image fit"><img src="images/budget6.png" alt="" /></span></div>
+								
+								</p>
+
+								<p>
+									<h2>Report</h2>
+									Once all the modeling was done, I threw on a KPI card with the amount spent.
+									The established budget was added as the target value, with a delta value showing
+									how far under or over the spending was from the budget value. The team also wanted a
+									way to see which managers had ordered which units, so I added a table at the bottom to aggregate
+									by manager and team. Users can search for a particular manager or team within the table.
+									Users can also filter by team using the main filter at the top of the page.
+									<br> 
+									<br>
+									<div class="col-12"><span class="image fit"><img src="images/example_budget_video.gif" alt="" /></span></div>
+								
+								</p>
+								<p>
+									Just the two visuals met the requirements for this part of the project,
+									but the team anticipates needing more complex reporting in the future for
+									their contracts with vendors and general program KPIs. I added a navigation
+									for the forthcoming report requirements so all their team information can be kept in one place.
+								</p>
+
+								<footer>
+									<ul class="stats">
+										<li><a href="data.html">>Data & visualizations</a></li>
+									</ul>
+								</footer>
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<ul class="icons">
+							<li><a href="meganlafleur.tx@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+									<li><a href="https://www.linkedin.com/in/meganlafleur/" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+									<li><a href="https://github.com/meganlafleur" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+						<p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a href="http://unsplash.com">Unsplash</a>.</p>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
