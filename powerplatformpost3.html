@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Power Platform</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="single is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">Megan Lafleur</a></h1>
+						<nav class="links">
+							<ul>
+								<li><a href="about.html">About</a></li>
+								<li><a href="data.html">Data & Visualizations</a></li>
+								<li><a href="powerplatform.html">Power Platform</a></li>
+							</ul>
+						</nav>
+						<nav class="main">
+							<ul>
+								<li class="search">
+									<a href="#search">Search</a>
+									<form id="search" method="get" action="#">
+										<input type="text" name="query" placeholder="Search" />
+									</form>
+								</li>
+								<li class="menu">
+									<a class="fa-bars" href="#menu">Menu</a>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<section id="menu">
+
+		
+
+						<!-- Links -->
+							<section>
+								<ul class="links">
+									<li>
+										<a href="powerplatformpost2.html">
+											<h3>Program enrollment process</h3>
+											<p>Replacing a shared Excel file with an app, list, and flow</p>
+										</a>
+									</li>
+									<li>
+										<a href="datapost2.html">
+											<h3>Identifying fuzzy duplicate clients</h3>
+											<p>Using postgresql to sort through a messy client list</p>
+										</a>
+									</li>
+									<li>
+										<a href="powerplatformpost1.html">
+											<h3>Canvas power app solution</h3>
+											<p>Integrated request form and approval process</p>
+										</a>
+									</li>
+								</ul>
+							</section>
+
+
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="#">Data Request Fulfillment</a></h2>
+										<p>Collecting and centralizing data requests</p>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2024-11-5">November 5, 2024</time>
+										<a href="#" class="author"><span class="name">Power Platform</span><img src="images/pplogo.png" alt="" /></a>
+									</div>
+								</header>
+								<span class="image featured"><img src="images/datareq3.png" alt="" /></span>
+								<p>
+						
+									A team was receiving frequent ad hoc data requests from regional offices 
+									via email. Requests weren't formally tracked and sometimes slipped through 
+									the cracks or were delayed.
+									A quick power app form presented a way to standardize the requests,
+									collect them, and put them all in one place. 
+									
+									For this team, a SharePoint List was the best option for their backend storage.
+						
+								
+								</p>
+
+								<p>
+									<h2>Form</h2>
+									The form first requests generic contact information. Some user information (like email) is collected automatically
+									using connectors. After the basics, the form collects information about the data request. 
+									The staff fulfilling the requests noted that frequently the staff requesting data
+									was familiar with parts of the database schemas or knew the types of parameters needed, but did not have
+									access to query independently.
+									To accomodate both technical users, and potentially less technical users, we
+									provided an option for users to add their own queries (or not). This also made it easier on internal staff
+									if much of the query was drafted already.
+									<br> 
+									<br>
+									<div class="col-12"><span class="image fit"><img src="images/datareq1.png" alt="" /></span></div>
+								
+								</p>
+
+								<p>
+						
+									Requesters are also given the option to specify the data format.
+									<br> 
+									<br>
+									<div class="col-12"><span class="image fit"><img src="images/datareq2.png" alt="" /></span></div>
+								
+								</p>
+
+								<p>
+						
+									Users who requested to enter their own query are presented with an input for their query. Users
+									who are unsure of the data location or request to provide general parameters receive the same page with
+									slight changes to the verbage.
+									<br> 
+									<br>
+									Users can hover over the "help" icon for recommendations on how to enter their query. 
+									<div class="col-12"><span class="image fit"><img src="images/datareq3.png" alt="" /></span></div>
+								
+								</p>
+
+								<p>
+									<h2>Tracking requests</h2>
+									The backend for the form is currently under development. It will
+									include both a gallery for regional users to see any requests they have submitted, as well
+									as a gallery for internal staff to see all requests. 
+							
+								
+								</p>
+
+
+								<footer>
+									<ul class="stats">
+										<li><a href="powerplatform.html">Power Platform</a></li>
+									</ul>
+								</footer>
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<ul class="icons">
+							<li><a href="meganlafleur.tx@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+									<li><a href="https://www.linkedin.com/in/meganlafleur/" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+									<li><a href="https://github.com/meganlafleur" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+						<p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a href="http://unsplash.com">Unsplash</a>.</p>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

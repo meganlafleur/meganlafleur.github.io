@@ -161,128 +161,50 @@
 
 				</div>
 
+			
+
+				
+
+					
 				<!-- Post -->
-				<article class="post">
-					<header>
-						<div class="title">
-							<h2><a href="">Data quality in Tableau</a></h2>
-							<p>Finding client duplicates</p>
-						</div>
-						<div class="meta">
-							<time class="published" datetime="2024-10-21">October 21, 2024</time>
-							<a href="#" class="author"><span class="name">Tableau</span><img src="images/tableau.png" alt="" /></a>
-						</div>
-					</header>
-
-					<span class="image featured"><img src="images/Example_merges.png" alt="" /></span>
-					
-					<p>This report was requested for staff to track the increase of a 
-						specific data point (clients) that were being duplicated in their 
-						database due to errors in the data ingested. They wanted to see how 
-						fast the duplicates were growing, how quickly they were being removed 
-						(merged), and which teams were removing them (this has been blocked out 
-						for privacy). 
-						This team did not want any filters in the report as they wanted a static file.
-						<br>
-						
-					</p>
-
-					<p>
-						The tables needed for this report were quite large, 
-						with some over 2 million rows. I opted for transforming and 
-						joining the data in Tableau and caching an extract which 
-						refreshed weekly. Six database tables were joined to get all the counts needed. 
-						Also appended to the removed/merged client count was an excel file with 
-						recently manually 
-						reviewed duplicate client accounts that were not reflected in the database.
-					</p>
-					<footer>
-						<ul class="stats">
-							<li><a href="#">Data & visualizations</a></li>
-						</ul>
-					</footer>
-				</article>
-
-		</div>
-
-						<!-- Post -->
-							<article class="post">
-								<header>
-									<div class="title">
-										<h2><a href="datapost1.html">Building out a landing page in Tableau</a></h2>
-										<p>Organizing Tableau dashboards using a centralized landing page</p>
-									</div>
-									<div class="meta">
-										<time class="published" datetime="2024-07-01">July 1, 2024</time>
-										<a href="#" class="author"><span class="name">Tableau</span><img src="images/tableau.png" alt="" /></a>
-									</div>
-								</header>
-								<span class="image featured"><img src="images/consent_dashboard.jpg" alt="" /></span>
-								<p>A recent side user experience project 
-									has been organizing the many Tableau
-									dashboards hoarded on a team's local drive with a Tableau-esque
-									table of contents with links to frequently used reports.
-									The goal is to organize them by topic and navigate around using just
-									one dashboard that I keep on hand.
-								</p>
-								<p>To have a linked path between content areas and reports, everything
-									will first need to be published into Tableau Server. Permissions will be set for
-									only the teams who require access.
-								
-									<br>
-									<br>
-							
-								
-								</p>
-								<footer>
-									<ul class="stats">
-										<li><a href="#">Data & visualizations</a></li>
-									</ul>
-								</footer>
-							</article>
-
-					</div>
-
-					
-						<!-- Post -->
-						<article class="post">
-							<header>
-								<div class="title">
-									<h2><a href="datapost2.html">Identifying fuzzy duplicate clients</a></h2>
-									<p>Using postgresql to sort through a messy client list</p>
-								</div>
-								<div class="meta">
+					<article class="post">
+						<header>
+							<div class="title">
+								<h2><a href="datapost2.html">Identifying fuzzy duplicate clients</a></h2>
+								<p>Using postgresql to sort through a messy client list</p>
+							</div>
+							<div class="meta">
 									<time class="published" datetime="2024-06-05">June 5, 2024</time>
 									<a href="#" class="author"><span class="name">SQL</span><img src="images/database.png" alt="sql database" /></a>
-								</div>
-							</header>
-							<span class="image featured"><img src="images/query1.png" alt="" /></span>
-							<p>An issue we faced at work was our database accepting duplicate client records, 
+							</div>
+						</header>
+						<span class="image featured"><img src="images/query1.png" alt="" /></span>
+						<p>An issue we faced at work was our database accepting duplicate client records, 
 								with the duplicates being scattered among several versions of a name or address. 
 								For example, we may have a Jane Doe and Jane Doe, both with a 3/2/65 date of birth 
 								and matching birth certificate ID, but one has the address 1234 Apple Ave and 
 								the other has the address 1234 Apple Ave Apt 103. Separately, we may have a Jane Doe and a Jaine doe
 								also with matching identifying information. 
 
-							<br>
-							<br>
-							<a href="datapost2.html" class="button large">See more</a>
-							</p>
+						<br>
+						<br>
+						<a href="datapost2.html" class="button large">See more</a>
+						</p>
 							
 							
 						
 							
 							
-							<footer>
-								<ul class="stats">
-									<li><a href="#">Data & visualizations</a></li>
+						<footer>
+							<ul class="stats">
+								<li><a href="#">Data & visualizations</a></li>
 				
-									</ul>
 								</ul>
-							</footer>
-						</article>
+							</ul>
+						</footer>
+					</article>
 
-				</div>
+			</div>
 
 					
 				<!-- Footer -->
